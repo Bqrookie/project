@@ -20,7 +20,7 @@ window.geometry('860x470')
 # 阻止Python GUI的大小调整
 window.resizable(0, 0)
 # window.overrideredirect(True)
-window.iconbitmap('C:/Users/Administrator/Desktop/Git/wifiManager/images/ico.ico')
+window.iconbitmap('C:/Users/Administrator/Desktop/Git/project/wifiRecord/images/ico.ico')
 # 窗口透明度60 %
 # window.attributes("-alpha", 0.9)
 
@@ -42,15 +42,14 @@ help_menu.add_command(label='技术支持')
 help_menu.add_command(label='在线更新')
 
 
-tabControl = ttk.Notebook(window)          # Create Tab Control
-
-tab_home = ttk.Frame(tabControl)            # Create a tab
-tabControl.add(tab_home, text='首页')      # Add the tab
-tab_manager = ttk.Frame(tabControl)            # Add a second tab
-tabControl.add(tab_manager, text='管理')      # Make second tab visible
-tab_find = ttk.Frame(tabControl)            # Add a second tab
-tabControl.add(tab_find, text='发现')      # Make second tab visible
-tabControl.pack(expand=1, fill="both")  # Pack to make visible
+tabControl = ttk.Notebook(window)
+tab_home = ttk.Frame(tabControl)
+tabControl.add(tab_home, text='首页')
+tab_manager = ttk.Frame(tabControl)
+tabControl.add(tab_manager, text='管理')
+tab_find = ttk.Frame(tabControl)
+tabControl.add(tab_find, text='发现')
+tabControl.pack(expand=1, fill="both")
 
 # Home 图片
 canvas = tk.Canvas(tab_home, height=700, width=700)
@@ -76,9 +75,10 @@ tree.pack(side='left', fill='both')
 
 
 def treeviewClick(event):  # 单击
-	for item in tree.selection():
-		item_text = tree.item(item, "values")
-		pass
+
+	# for item in tree.selection():
+	# 	item_text = tree.item(item, "values")
+	# 	pass
 
 	li = tree.item(tree.selection())['values']
 	top_tk(li)
@@ -99,7 +99,7 @@ def top_tk(li):
 		win.title(str(li[2]))
 		# 阻止Python GUI的大小调整
 		win.resizable(0, 0)
-		win.iconbitmap('C:/Users/Administrator/Desktop/Git/wifiManager/images/ico.ico')
+		win.iconbitmap('C:/Users/Administrator/Desktop/Git/project/wifiRecord/images/ico.ico')
 		# 窗口透明度60 %
 		win.attributes("-alpha", 0.9)
 
@@ -128,7 +128,8 @@ def top_tk(li):
 			try:
 				db.edit_data(da, li[0])
 			except Exception as ret:
-				print(ret)
+				# print(da)
+				print('edit_data 【%s】' % ret)
 			finally:
 				callback()
 
@@ -154,7 +155,8 @@ def top_tk(li):
 			try:
 				db.insert_data(add)
 			except Exception as ret:
-				print(ret)
+				# print('a')
+				print('add_data【%s】' % ret)
 			finally:
 				callback()
 
