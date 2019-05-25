@@ -1,6 +1,6 @@
 import re
 
-with open('1.md', 'r') as f:
+with open('test.md', 'r') as f:
     content = f.readlines()
 
 for x in content:
