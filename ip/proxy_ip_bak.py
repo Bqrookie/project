@@ -11,22 +11,21 @@ import csv
 
 
 def xicidaili(url, msg):
-	re_url = str(url.split('/')[4])
 	jg = list()
 	res_dict = {}
 	file_name = str(msg) + '.csv'
 	try:
-		print('开始爬取第%s页...' % (re_url,))
+		time.sleep(50)
 		browser = webdriver.Chrome()
-		time_num = int(random.uniform(50, 200))
-		time.sleep(time_num)
 
 		browser.get(url)
+
+		time.sleep(3)
 
 		pageSource = browser.page_source
 		soup = BeautifulSoup(pageSource, 'html.parser')
 		res = soup.find_all('tr')
-		title = ['ip', 'port']
+		title = ['ip', 'port', '地址', '是否匿名', '类型', '存活时间', '验证时间']
 
 		csv_file = open(file_name, 'a', newline='')
 		csv_write = csv.writer(csv_file, dialect='excel')
@@ -39,9 +38,14 @@ def xicidaili(url, msg):
 		for x in range(int(len(jg))):
 			user_ip    = ''
 			user_port  =  ''
+			user_addr  =  ''
+			user_isnn=  ''
+			user_type  =  ''
+			user_over_time=  ''
+			user_time=  ''
 			for i in range(int(len(jg[x]))):
 
-				user_ip = str(jg[x][1].text).replace("\n","")
+				user_ip = str(jg[x][1].text).replace("\n","") 
 				if len(user_ip) == 0:
 					user_ip = 'No'
 
@@ -49,12 +53,35 @@ def xicidaili(url, msg):
 				if len(user_port) == 0:
 					user_port = 'No'
 
-			csv_write.writerow([user_ip, user_port])
+				user_addr  = str(jg[x][3].text).replace("\n","")
+				if len(user_addr) == 0:
+					user_addr = 'No'
+
+				user_isnn= str(jg[x][4].text).replace("\n","")
+				if len(user_isnn) == 0:
+					user_isnn = 'No'
+
+				user_type  = str(jg[x][5].text).replace("\n","")
+				if len(user_type) == 0:
+					user_type = 'No'
+
+				user_over_time= str(jg[x][8].text).replace("\n","")
+				if len(user_over_time) == 0:
+					user_over_time = 'No'
+				else:
+					user_over_time = change_time(str(user_over_time))
+
+				user_time= str(jg[x][9].text).replace("\n","") + ':00'
+				if len(user_time) < 3:
+					user_time = 'No'
+
+
+			csv_write.writerow([user_ip, user_port, user_addr, user_isnn, user_type, user_over_time, user_time])
 
 	except Exception as e:
 		print(e)
 	finally:
-		print('第%s页爬取完成!' % (re_url,))
+		
 		browser.close()
 
 # def change_time(string):
@@ -77,17 +104,12 @@ def xicidaili(url, msg):
 
 def main():
 	# xicidaili("http://localhost/m/")
-	po = Pool(25)
+	po = Pool(10)
 	# for i in range(1, 4):
-	# url = 'http://localhost/m/'
+	url = 'http://localhost/m/'
 	# url = 'https://www.xicidaili.com/nn/'
-	# url = 'https://www.xicidaili.com/nt/'
-	# url = 'https://www.xicidaili.com/wn/'
-
-	url = 'https://www.xicidaili.com/wt/'
-	for i in range(1,100):
+	for i in range(1,101):
 		# print(url+str(i))
-
 		tmp_url = url + str(i)
 		po.apply_async(xicidaili, (str(tmp_url), str(i)))
 	# 	# worker(str(i))
