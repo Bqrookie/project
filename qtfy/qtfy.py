@@ -1,13 +1,8 @@
 from multiprocessing import Pool
 from bs4 import BeautifulSoup
 import requests
-import urllib
-import csv
-import time
-import random
 
 from copyheaders import headers_raw_to_dict
-
 
 def get_movie(url, num):
 	flag = True
@@ -30,25 +25,17 @@ Cookie: UM_distinctid=16a120628db11b-0b0a54138372d7-e323069-144000-16a120628dc32
 		soup = BeautifulSoup(res, 'html.parser')
 		result = soup.find_all('ul')[0].find_all('li')
 		for i in result:
-			# time.sleep(random.randint(20, 50))
 
 			cont = ('%s%s' % ('http://www.qtfy7.com', i.find('a').get('href')))
 			b = requests.get(cont, headers=headers_raw_to_dict(header))
 			data = b.content
 			soup_data = BeautifulSoup(data, 'html.parser')
 			result_down_url = soup_data.find_all(attrs={"class": "down_part_name"})
-			#attrs={"name": "down_url_list_0"}) #name='down_url_list_0')
-			# print(result_down_url)
-			# if result_down_url:
+
 			for i in result_down_url:
-				# data_soup = BeautifulSoup(i)
 				con = ('%s' % (str(i).split('"')[3],))
 				save_url(con, num)
-				# print(str(i).split('"')[5])
 				break
-			# 	print(result_down_url[0])
-
-			# print(result_down_url)
 		# print(result)
 	except Exception as e:
 			# print(ip)
@@ -69,14 +56,11 @@ def main():
 	url = 'http://www.qtfy7.com/vod-type-1-'
 	# url_list = ['http://www.qtfy7.com/vod-type-1-1134.html']
 
-	po = Pool(20)
+	po = Pool(3)
 
-	for i in range(99,500):
+	for i in range(1,500):
 		url_res =  url + str(i) + '.html'
-		# po.apply_async(get_movie, (url_res, str(i)))
-		time.sleep(random.randint(10,50))
-		get_movie(url_res, str(i)) # po.apply_async((url_res, str(i)))
-		# print(url_res)
+		po.apply_async(get_movie, (url_res, str(i)))
 
 	po.close()
 	po.join()
