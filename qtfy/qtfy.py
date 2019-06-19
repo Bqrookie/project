@@ -1,11 +1,9 @@
 import requests
 import ip_tool
-import re
 import queue
 import threading
 from bs4 import BeautifulSoup
 import csv
-import json
 
 # 创建一个队列
 page_queue = queue.Queue(1134)
@@ -27,7 +25,6 @@ def get_all_page():
 	# url_list = ['http://www.qtfy7.com/vod-type-1-1134.html']
 
 	for i in range(1, 1135):
-	# for i in range(1, 2):
 		url_res = url + str(i) + '.html'
 		page_list.append(url_res)
 
@@ -61,22 +58,16 @@ def get_video_list():
 			# 没有报异常，说明访问成功
 			# 获得返回数据
 			if req.status_code == 200:
-				# print(req.text)
 				soup = BeautifulSoup(req.text, "html.parser")
 
 				tag = soup.find_all('h2')
 				for item in tag:
 					video_link = tmp_url + item.a.get('href')
 					get_down_url(video_link)
-					# result = [video_link, item.a.text]
-					# csv_write.writerow(result)
-					# print('%s 采集完成' % (video_link,))
 				break
 			else:
+				# 访问异常直接抛出重新采集
 				raise Exception
-
-
-
 		except Exception as msg:
 			# 访问失败了，所以要把我们刚才取出的数据再放回去队列中
 			page_queue.put(this_page)
@@ -84,12 +75,9 @@ def get_video_list():
 
 
 def get_down_url(link):
-	test_link = 'http://www.qtfy7.com/content-24505.html'
 	while True:
 		try:
-
-			tmp = requests.get(link, proxies={"http": ip_tool.get_proxies()}, timeout=15,
-							   headers=ip_tool.get_headers())
+			tmp = requests.get(link, proxies={"http": ip_tool.get_proxies()}, timeout=15, headers=ip_tool.get_headers())
 			if tmp.status_code == 200:
 				ss = BeautifulSoup(tmp.text, "html.parser")
 				down_link = ss.select('.down_part_name')
@@ -113,14 +101,12 @@ def get_down_url(link):
 def main():
 	# 获取所有页面
 	url_list = get_all_page()
-
 	# 将所有页面放入先进先出的队列中
 	# 队列的写入和读取都是阻塞的，故在多线程情况下不会乱
 	# 在不使用框架的前提下，引入多线程，提高爬取效率
 
 	# 写入页面数据到队列
 	for i in range(len(url_list)):
-		# fund_code_list[i]也是list类型，其中该list中的第0个元素存放基金代码
 		page_queue.put(url_list[i])
 
 	# 线程数为50，在一定范围内，线程数越多，速度越快
@@ -129,8 +115,5 @@ def main():
 		t.start()
 
 
-
-
 if __name__ == '__main__':
 	main()
-
