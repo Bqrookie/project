@@ -11,7 +11,7 @@ page_queue = queue.Queue(1134)
 # 创建一个线程锁，防止多线程写入文件时发生错乱
 # mutex_lock = threading.Lock()
 
-out = open('qtfy2.csv', 'a+', newline='')
+out = open('qtfy.csv', 'a+', newline='')
 csv_write = csv.writer(out, dialect='excel')
 
 def get_all_page():

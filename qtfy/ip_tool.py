@@ -53,11 +53,13 @@ def get_headers():
 # 建议自己搭建一个本地代理池，这样获取代理的速度更快
 # 代理池搭建github地址https://github.com/1again/ProxyPool
 # 搭建完毕后，把下方的proxy.1again.cc改成你的your_server_ip，本地搭建的话可以写成127.0.0.1或者localhost
+
 def get_proxies():
-    data_json = requests.get("http://proxy.1again.cc:35050/api/v1/proxy/?region=%E4%B8%AD%E5%9B%BD").text
-    data = json.loads(data_json)
-    return data['data']['proxy']
+	data_json = requests.get("http://proxy.1again.cc:35050/api/v1/proxy/?region=%E4%B8%AD%E5%9B%BD").text
+	data = json.loads(data_json)
+	return data['data']['proxy']
 
 
 if __name__ == '__main__':
 	get_proxies()
+
