@@ -16,10 +16,6 @@
 2. 通过网络请求分析，可知：请求用户全部视频时会通过
 ```https://space.bilibili.com/ajax/member/getSubmitVideos?mid=28152409&pagesize=30&tid=0&page=1&keyword=&order=pubdate```
    返回json数据，并且可知mid为用户ID号，page参数为页数
-
-   ![](./images/request_url.bmp)
-   
-
 3. 通过拼接生成视频链接并且通过队列和多线程爬取视频信息
 
    ![](./images/page_queue.bmp)
