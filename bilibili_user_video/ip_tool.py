@@ -44,7 +44,10 @@ def get_headers():
                  'Accept-Encoding': 'gzip, deflate, br',
                  'Accept-Language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7',
                  'Cache-Control': 'max-age=0',
-                 'Connection': 'keep-alive'}
+                 'Connection': 'keep-alive',
+               'Host': 'space.bilibili.com',
+               'Upgrade - Insecure - Requests': '1',
+               }
 
     return headers
 
