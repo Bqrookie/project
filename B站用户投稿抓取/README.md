@@ -3,7 +3,9 @@
 ## 简介
 通过用户ID爬取用户所有投稿视频信息
 
-本程序所采集用户ID为B站UP主[交通事故video](https://space.bilibili.com/28152409/video) 宣扬礼让行车正能量&&不规范行车造成的交通事故
+本程序所采集用户ID为B站UP主[交通事故video](https://space.bilibili.com/28152409/video) 
+
+**宣扬礼让行车正能量&&不规范行车造成的交通事故**
 
 **道路千万条，安全第一条。开车不规范，亲人两行泪。**
 
@@ -11,7 +13,11 @@
 ## 编写思路
 1. 通过Chrome的[Elements](https://developers.google.com/web/tools/chrome-devtools/css/)和[Network](https://developers.google.com/web/tools/chrome-devtools/network/)分析可知：[B站用户个人中心](https://space.bilibili.com/28152409/video)包含所有投稿视频的数据，同时，该地址具有反爬机制，直接访问将会失败的情况，显示请求更换浏览器等字样。
 
-2. 通过网络请求分析，可知：请求用户全部视频时会通过https://space.bilibili.com/28152409/video?tid=0&page=1&keyword=&order=pubdate返回json数据，并且可知28152409为用户ID号，page参数为页数
+2. 通过网络请求分析，可知：请求用户全部视频时会通过
+
+    ```https://space.bilibili.com/28152409/video?tid=0&page=1&keyword=&order=pubdate```
+
+   返回json数据，并且可知28152409为用户ID号，page参数为页数
 
    ![](./images/request_url.bmp)
 
