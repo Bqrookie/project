@@ -61,5 +61,6 @@ def get_proxies():
 
 
 if __name__ == '__main__':
+	# 测试OK
 	get_proxies()
 

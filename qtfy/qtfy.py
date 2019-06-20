@@ -6,12 +6,12 @@ from bs4 import BeautifulSoup
 import csv
 
 # 创建一个队列
-page_queue = queue.Queue(1134)
+page_queue = queue.Queue(888)
 
 # 创建一个线程锁，防止多线程写入文件时发生错乱
 # mutex_lock = threading.Lock()
 
-out = open('qtfy.csv', 'a+', newline='')
+out = open('qtfy_d.csv', 'a+', newline='')
 csv_write = csv.writer(out, dialect='excel')
 
 def get_all_page():
@@ -21,10 +21,15 @@ def get_all_page():
 	"""
 
 	page_list = list()
-	url = 'http://www.qtfy7.com/vod-type-1-'
-	# url_list = ['http://www.qtfy7.com/vod-type-1-1134.html']
+	# url = 'http://www.qtfy7.com/vod-type-1-'#电影
+	url = 'http://www.qtfy7.com/vod-type-2-' # 电视剧
 
-	for i in range(1, 1135):
+	# 抓取的第一页
+	min_page = 1
+	# 抓取的最后一页
+	max_page = 888
+
+	for i in range(min_page, max_page):
 		url_res = url + str(i) + '.html'
 		page_list.append(url_res)
 
@@ -32,16 +37,18 @@ def get_all_page():
 
 
 def get_video_list():
-	# print('1')
+
 	"""
 	获取每个页面的电视链接
 	:return:
 	"""
 	# 当队列不为空时
-	while (not page_queue.empty()):
+	while not page_queue.empty():
+
+		# 因为是专门抓qtfy的，所以直接固定前段网址
 		tmp_url = 'http://www.qtfy7.com'
 
-		# 从队列读取一个基金代码
+		# 从队列读取一个网址
 		# 读取是阻塞操作
 		this_page = page_queue.get()
 		# 获取一个代理，格式为ip:端口
@@ -53,8 +60,6 @@ def get_video_list():
 		try:
 			# 使用代理访问
 			req = requests.get(this_page, proxies={"http": proxies}, timeout=5, headers=headers)
-			# print(1)
-
 			# 没有报异常，说明访问成功
 			# 获得返回数据
 			if req.status_code == 200:
@@ -66,12 +71,12 @@ def get_video_list():
 					get_down_url(video_link)
 				break
 			else:
-				# 访问异常直接抛出重新采集
+				# 访问异常直接抛出并且重新采集
 				raise Exception
 		except Exception as msg:
 			# 访问失败了，所以要把我们刚才取出的数据再放回去队列中
 			page_queue.put(this_page)
-			print("get_video_list【%s】" % (msg))
+			print("fun:get_video_list【%s】" % (msg,))
 
 
 def get_down_url(link):
@@ -95,7 +100,7 @@ def get_down_url(link):
 					print('%s 采集完成' % (link,))
 				break
 		except Exception as e:
-			print('get_down_url[%s]' % (e,))
+			print('fun:get_down_url[%s]' % (e,))
 
 
 def main():
