@@ -23,9 +23,9 @@
 爬取某一分类所有电影的下载链接
 
 ## 完整代码
-完整版源代码存放在[github][https://github.com/Bqrookie/project] 上，有需要的可以下载
-项目持续更新，欢迎您[star本项目][https://github.com/Bqrookie/project]
+完整版源代码存放在[github](https://github.com/Bqrookie/project)上，有需要的可以下载
+项目持续更新，欢迎您[star本项目](https://github.com/Bqrookie/project)
 
 ## Lincense
- [The MIT License (MIT)][http://opensource.org/licenses/MIT]
+ [The MIT License (MIT)](http://opensource.org/licenses/MIT)
 
