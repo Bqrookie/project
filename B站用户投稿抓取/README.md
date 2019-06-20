@@ -14,13 +14,10 @@
 1. 通过Chrome的[Elements](https://developers.google.com/web/tools/chrome-devtools/css/)和[Network](https://developers.google.com/web/tools/chrome-devtools/network/)分析可知：[B站用户个人中心](https://space.bilibili.com/28152409/video)包含所有投稿视频的数据，同时，该地址具有反爬机制，直接访问将会失败的情况，显示请求更换浏览器等字样。
 
 2. 通过网络请求分析，可知：请求用户全部视频时会通过
-
-    ```https://space.bilibili.com/28152409/video?tid=0&page=1&keyword=&order=pubdate```
-
-   返回json数据，并且可知28152409为用户ID号，page参数为页数
+```https://space.bilibili.com/ajax/member/getSubmitVideos?mid=28152409&pagesize=30&tid=0&page=1&keyword=&order=pubdate```
+   返回json数据，并且可知mid为用户ID号，page参数为页数
 
    ![](./images/request_url.bmp)
-
    
 
 3. 通过拼接生成视频链接并且通过队列和多线程爬取视频信息
