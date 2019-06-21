@@ -1,13 +1,7 @@
 # 百度图片下载
 
 ## 简介
-通过用户ID爬取用户所有投稿视频信息
-
-本程序所采集用户ID为B站UP主[交通事故video](https://space.bilibili.com/28152409/video) 
-
-**宣扬礼让行车正能量&&不规范行车造成的交通事故**
-
-**道路千万条，安全第一条。开车不规范，亲人两行泪。**
+通过用户输入关键字自动下载百度的图片
 
 
 ## 编写思路
@@ -17,7 +11,7 @@
 https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=rj&ct=201326592&is=&fp=result&queryWord=&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=&ic=0&word=python&face=0&istype=2&qc=&nc=1&fr=&pn=0&rn=30
    ```
 
-   其中**word**为搜索关键字，**rn**为请求返回的图片数**[每页返回的图片数量，可设上限值为60]**，并且可以通过测试可知**pn的关系**如下：
+其中**word**为搜索关键字，**rn**为请求返回的图片数**[每页返回的图片数量，可设上限值为60]**，并且可以通过测试可知**pn的关系**如下：
 ```html
    ∵第一页pn为0
    ∵第二页pn为30
@@ -32,7 +26,7 @@ https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=
    
 3. 直接通过**搜索的关键字**建立新的目录并存放于程序运行的当前目录
 
-4. 请求的图片通过```random.randint(1000000,9999990)```和```time.time()```组合命名防止重复**[懒]**
+4. 请求的图片通过```random.randint(1000000,9999990)```和```time.time()```组合命名防止重复**懒**
 
 
 ## 使用教程
