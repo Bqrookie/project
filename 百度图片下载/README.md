@@ -57,7 +57,7 @@ https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=
 
 ## 补充
 * [ ] 下载的目录需要自己设置
-* [] 实现多线程下载
+* [ ] 实现多线程下载
 
 
 
