@@ -7,9 +7,9 @@
 ## 编写思路
 1. 通过Chrome的[Elements](https://developers.google.com/web/tools/chrome-devtools/css/)和[Network](https://developers.google.com/web/tools/chrome-devtools/network/)分析可知：请求用户全部视频时会通过
 
-   ```html
+```html
 https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=rj&ct=201326592&is=&fp=result&queryWord=&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=&ic=0&word=python&face=0&istype=2&qc=&nc=1&fr=&pn=0&rn=30
-   ```
+```
 
 其中**word**为搜索关键字，**rn**为请求返回的图片数**[每页返回的图片数量，可设上限值为60]**，并且可以通过测试可知**pn的关系**如下：
 ```html
@@ -27,7 +27,7 @@ https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=
 3. 直接通过**搜索的关键字**建立新的目录并存放于程序运行的当前目录
 
 4. 请求的图片通过```random.randint(1000000,9999990)```和```time.time()```组合命名防止重复**懒**
-
+[]
 
 ## 使用教程
 1.在main中填写用户id和爬取的线程数
