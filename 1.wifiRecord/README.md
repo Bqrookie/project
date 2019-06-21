@@ -12,7 +12,7 @@
 * ttk
 
 ## 使用教程
-根据自己情况修改```db_sql.py```里面的init_config配置即可，数据库可以使用```wps.sql```生成[因为还没看到数据库，感觉好乱]
+根据自己情况修改```db_sql.py```里面的```init_config```配置即可，数据库可以使用```wps.sql```生成[因为还没看到数据库，感觉好乱]
 ```python
 def init_config():
     config = {
