@@ -39,6 +39,9 @@ https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=
 
     # 设置需要下载图片的页数
     pages = 3
+    
+    # 设置下载目录
+    file_path = 'C:/Users/Administrator/Desktop/Git/project/百度图片下载/' + search_work + '/'
 ```
 
 >**注意**
@@ -51,6 +54,10 @@ https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=
 
 * [x] 通过用户输入关键字自动下载图片
 * [x] 下载的图片数量可控
+
+## 补充
+* [ ] 下载的目录需要自己设置
+* [] 实现多线程下载
 
 
 

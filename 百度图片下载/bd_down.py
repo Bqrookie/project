@@ -15,9 +15,8 @@ def get_proxies_headers():
     return proxies, headers
 
 
-def get_image(word, num):
+def get_image(word, num, file_path):
 
-    file_path = 'C:/Users/Administrator/Desktop/Git/project/百度图片下载/' + word + '/'
     isExists = os.path.exists(file_path)
 
     if not isExists:
@@ -59,13 +58,16 @@ def get_image(word, num):
 def main():
 
     # 设置搜索关键字
-    search_work = 'apple'
+    search_work = '倒霉熊'
 
     # 设置需要下载图片的页数
     pages = 3
 
+    # 设置下载目录
+    file_path = 'C:/Users/Administrator/Desktop/Git/project/百度图片下载/' + search_work + '/'
+
     for i in range(1, pages+2):
-        get_image(search_work, i)
+        get_image(search_work, i, file_path)
 
 
 if __name__ == '__main__':
