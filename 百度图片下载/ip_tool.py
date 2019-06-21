@@ -56,9 +56,14 @@ def get_headers():
 # 搭建完毕后，把下方的proxy.1again.cc改成你的your_server_ip，本地搭建的话可以写成127.0.0.1或者localhost
 
 def get_proxies():
-    data_json = requests.get("http://proxy.1again.cc:35050/api/v1/proxy/?region=%E4%B8%AD%E5%9B%BD").text
-    data = json.loads(data_json)
-    return data['data']['proxy']
+    try:
+        data_json = requests.get("http://proxy.1again.cc:35050/api/v1/proxy/?region=%E4%B8%AD%E5%9B%BD").text
+        data = json.loads(data_json)
+    except Exception as msg:
+        data_json = requests.get("http://proxy.1again.cc:35050/api/v1/proxy/?region=%E4%B8%AD%E5%9B%BD").text
+        data = json.loads(data_json)
+    finally:
+        return data['data']['proxy']
 
 
 if __name__ == '__main__':
