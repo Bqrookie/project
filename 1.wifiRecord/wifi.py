@@ -20,7 +20,7 @@ window.geometry('860x470')
 # 阻止Python GUI的大小调整
 window.resizable(0, 0)
 # window.overrideredirect(True)
-window.iconbitmap('C:/Users/Administrator/Desktop/Git/project/wifiRecord/images/ico.ico')
+window.iconbitmap('C:/Users/Administrator/Desktop/Git/project/1.wifiRecord/images/ico.ico')
 # 窗口透明度60 %
 # window.attributes("-alpha", 0.9)
 
@@ -99,7 +99,7 @@ def top_tk(li):
         win.title(str(li[2]))
         # 阻止Python GUI的大小调整
         win.resizable(0, 0)
-        win.iconbitmap('C:/Users/Administrator/Desktop/Git/project/wifiRecord/images/ico.ico')
+        win.iconbitmap('C:/Users/Administrator/Desktop/Git/project/1.wifiRecord/images/ico.ico')
         # 窗口透明度60 %
         win.attributes("-alpha", 0.9)
 
