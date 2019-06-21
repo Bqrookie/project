@@ -1,11 +1,17 @@
 import re
 
-with open('test.md', 'r') as f:
+with open('a.md', 'rb') as f:
     content = f.readlines()
 
+# print(type(content))
+
 for x in content:
-    ret = re.findall('^#', x, re.I)
+    # print(x.decode('utf-8'))
+    # continue
+    res = x.decode('utf-8')
+    ret = re.findall('^#', res)
     if ret:
-        num = x.count('#')
-        res = ' ' * num * 2 + '* [' + x[num:].replace("\n", "").replace(" ", "") + '](#' + x[num:].replace("\n", "").replace(" ", "") + ')'
-        print(res[2:])
+        num = res.count('#')
+        result = ' ' * num * 2 + '* [' + res.split(' ')[1].replace('\r\n', '') + '](#' + res.split(' ')[1].replace('\r\n', '') + ')'
+        print(result[2:])
+        # print(res[2:])
