@@ -23,9 +23,9 @@ https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=
 
 
 
-2. 遍历返回的json数据，可以获取图片的**weight**和**height**属性
+2. 遍历返回的json数据，可以获取图片的详细属性
    
-3. 直接通过**搜索的关键字**建立新的目录并存放于程序运行的当前目录
+3. 直接通过**搜索的关键字**建立新的目录存放图片,**当然，存放的路径需要自己设置一下**
 
 4. 请求的图片通过```random.randint(1000000,9999990)```和```time.time()```组合命名防止重复**[懒]**
 
@@ -34,7 +34,7 @@ https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=
 1.在main中填写用户id和爬取的线程数
 
 ```python
-     # 设置搜索关键字
+    # 设置搜索关键字
     search_work = 'apple'
 
     # 设置需要下载图片的页数
