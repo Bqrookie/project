@@ -12,6 +12,7 @@ for x in content:
     ret = re.findall('^#', res)
     if ret:
         num = res.count('#')
-        result = ' ' * num * 2 + '* [' + res.split(' ')[1].replace('\r\n', '') + '](#' + res.split(' ')[1].replace('\r\n', '') + ')'
+        tmp_str = res.split(' ')[1].replace('\r\n', '').lstrip().rstrip()
+        result = ' ' * num * 2 + '* [' + tmp_str + '](#' + tmp_str + ')'
         print(result[2:])
         # print(res[2:])

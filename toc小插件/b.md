@@ -4,7 +4,7 @@
     * [The_Features](#The_Features)
       * [The_Features](#The_Features)
     * [The_Features](#The_Features)
-* [environmentaldependence](#environmentaldependence)
+* [environmental](#environmental)
   * [the_JDK](#the_JDK)
   * [Maven](#Maven)
 * [quick_start](#quick_start)
