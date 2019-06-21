@@ -11,7 +11,8 @@
 https://image.baidu.com/search/acjson?tn=resultjson_com&catename=pcindexnew&ipn=rj&ct=201326592&is=&fp=result&queryWord=&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=&ic=0&word=python&face=0&istype=2&qc=&nc=1&fr=&pn=0&rn=30
 ```
 
-其中**word**为搜索关键字，**rn**为请求返回的图片数**[每页返回的图片数量，可设上限值为60]**，并且可以通过测试可知**pn的关系**如下：
+其中**word**为搜索关键字，**rn**为请求返回的图片数<br>
+**[每页返回的图片数量，可设上限值为60]**，并且可以通过测试可知**pn的关系**如下：
 ```html
    ∵第一页pn为0
    ∵第二页pn为30
