@@ -59,12 +59,12 @@ def get_image(word, num):
 def main():
 
     # 设置搜索关键字
-    search_work = '轻松熊'
+    search_work = 'apple'
 
     # 设置需要下载图片的页数
-    pages = 5
+    pages = 3
 
-    for i in range(1, pages+1):
+    for i in range(1, pages+2):
         get_image(search_work, i)
 
 
