@@ -16,24 +16,14 @@ im = None
 # 窗口设置
 window = tk.Tk()
 window.title('管理器')
-window.geometry('860x470')
+# window.geometry('860x470')
 # 阻止Python GUI的大小调整
 window.resizable(0, 0)
-# window.overrideredirect(True)
 window.iconbitmap('C:/Users/Administrator/Desktop/Git/project/1.wifiRecord/images/ico.ico')
-# 窗口透明度60 %
-# window.attributes("-alpha", 0.9)
 
 
 # 菜单栏
 menubar = tk.Menu(window)
-
-# file_menu = tk.Menu(menubar, tearoff=0)
-# menubar.add_cascade(label='文件', menu=file_menu)
-#
-# set_menu = tk.Menu(menubar, tearoff=0)
-# # menubar.add_cascade(label='Home', menu=filemenu)
-# menubar.add_cascade(label='选项', menu=set_menu)
 
 help_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label='选项', menu=help_menu)
@@ -43,28 +33,25 @@ help_menu.add_command(label='在线更新')
 
 
 tabControl = ttk.Notebook(window)
-tab_home = ttk.Frame(tabControl)
-tabControl.add(tab_home, text='首页')
+
+# tab_home = ttk.Frame(tabControl)
+# tabControl.add(tab_home, text='首页')
+
 tab_manager = ttk.Frame(tabControl)
 tabControl.add(tab_manager, text='管理')
+
 tab_find = ttk.Frame(tabControl)
 tabControl.add(tab_find, text='发现')
 tabControl.pack(expand=1, fill="both")
 
-# Home 图片
-canvas = tk.Canvas(tab_home, height=700, width=700)
-image_file = tk.PhotoImage(file='images/Home.gif')
-image = canvas.create_image(340,210, anchor='center', image=image_file)
-canvas.pack()
-
 # 管理页面数据展示
-cloumns_list = ['1','2','3', '4', '5', '6', '7', '8']
-heading_list = ['id', 'mac', 'ssid', 'pwd', 'router', 'routerPwd', 'pin', 'remarks']
+cloumns_list = ['1','2','3', '4']#, '5', '6', '7', '8']
+heading_list = ['id', 'mac', 'ssid', 'pwd']#, 'router', 'routerPwd', 'pin', 'remarks']
 
 tree = ttk.Treeview(tab_manager,columns=cloumns_list, show='headings')
 
 for    temp in range(len(heading_list)):
-    tree.column(str(temp+1), width=107, anchor='center')
+    tree.column(str(temp+1), anchor='center')
 
 for    temp in range(len(heading_list)):
     tree.heading(str(temp+1),text=heading_list[temp])
@@ -76,17 +63,12 @@ tree.pack(side='left', fill='both')
 
 def treeviewClick(event):  # 单击
 
-    # for item in tree.selection():
-    #     item_text = tree.item(item, "values")
-    #     pass
-
     li = tree.item(tree.selection())['values']
     top_tk(li)
 
 
-
 def top_tk(li):
-    edit = {}
+
     global win
     global name_text
     try:
@@ -106,7 +88,6 @@ def top_tk(li):
         def callback():
             for item in tree.get_children():
                 tree.delete(item)
-
             res_data = db.get_data()
             win.destroy()
 
@@ -127,9 +108,8 @@ def top_tk(li):
             da['remarks'] = name_remarks.get()
             try:
                 db.edit_data(da, li[0])
-            except Exception as ret:
-                # print(da)
-                print('edit_data 【%s】' % ret)
+            except Exception as msg:
+                print('edit_data 【%s】' % msg)
             finally:
                 callback()
 
@@ -154,9 +134,8 @@ def top_tk(li):
 
             try:
                 db.insert_data(add)
-            except Exception as ret:
-                # print('a')
-                print('add_data【%s】' % ret)
+            except Exception as msg:
+                print('add_data【%s】' % msg)
             finally:
                 callback()
 
