@@ -1,25 +1,40 @@
-https://translate.google.cn/translate_a/single?client=webapp&
+# 谷歌翻译小工具
 
-sl=en&tl=zh-CN      &hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=1&ssel=3&tsel=0&kc=1&tk=908048.738576&q=text
+## 简介
+谷歌翻译小工具
 
-https://translate.google.cn/translate_a/single?client=webapp&
+## 编写思路
+1. 通过读取谷歌翻译的接口来编写的 
 
-sl=en&tl=zh-CN      &hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&
+## 使用教程
+Translation类默认中译英，英译中需要带参数
+```python
+class Translation:
 
-otf=1   &ssel=3     &tsel=6     &kc=5     &tk=115148.483276&q=apple
+    def __init__(self, query, flag=False):
+        """
+        默认就是中文翻译成英文
+        :param query: 翻译的文字
+        :param flag: False就是中译英 True就是英译中
+        """
+        # 默认就是中文=>英文
+        self.flag = flag
+        self.query = query
+```
 
-https://translate.google.cn/translate_a/single?client=webapp&
+## 功能
 
-sl=zh-CN&tl=en      &hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&
+* [x] 中英互译【其他语种的已经备份好，随时可以添加】
 
-otf=2    &ssel=3    &tsel=3     &kc=1     &tk=26998.456566       &q=%E4%B8%AD%E5%9B%BD
+    ```sl=en 需要翻译的语种  tl=zh-CN 目标语种 tkk参数采用大神写好的加密脚本```
 
-https://translate.google.cn/translate_a/single?client=webapp&
+## 补充
+* [ ] 多语种翻译和gui没做
 
-sl=zh-CN&tl=en        &hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&
+## 完整代码
+完整版源代码存放在[github](https://github.com/Bqrookie/project)上，有需要的可以下载
+项目持续更新，欢迎您[star本项目](https://github.com/Bqrookie/project)
 
-otf=2    &ssel=3     &tsel=3     &kc=1     &tk=695043.787715     &q=%E4%B8%8A%E6%B5%B7
+## Lincense
+ [The MIT License (MIT)](http://opensource.org/licenses/MIT)
 
-https://translate.google.cn/gen204?slc=auto&client=webapp&sl=auto&tl=en&dsl=zh-CN&ql=2&ct=2890&stp=rglr&emphlang=zh-CN%7Cen%7Cauto&sugglang=zh-CN%7Cen%7Cde&slc=auto
-
-https://translate.google.cn/gen204?slc=auto&client=webapp&sl=auto&tl=en&dsl=zh-CN&ql=2&ct=2890&stp=rglr&emphlang=zh-CN|en|auto&sugglang=zh-CN|en|de&slc=auto

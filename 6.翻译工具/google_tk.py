@@ -3,8 +3,8 @@ import execjs
 
 class Py4Js:
 
-	def __init__(self):
-		self.ctx = execjs.compile("""
+    def __init__(self):
+        self.ctx = execjs.compile("""
         function TL(a) {
         var k = "";
         var b = 406644;
@@ -46,6 +46,6 @@ class Py4Js:
     """)
 
 
-	def getTk(self, text):
-		return self.ctx.call("TL", text)
+    def getTk(self, text):
+        return self.ctx.call("TL", text)
 
