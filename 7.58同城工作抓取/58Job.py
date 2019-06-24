@@ -3,9 +3,83 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-find_work = Fw.FindWork()
-citys = find_work.citys['citys']
 
+
+
+
+def main():
+
+	# 展示选择信息
+	local_url, local_job = show()
+	# print(local_url)
+	get_max_page(local_url, find_work.MyTool.url_conversion(local_job, True))
+
+
+def get_max_page(local_url, local_job):
+	num = 1
+	res_url = local_url + "pn" + str(num) + "/?key=" + find_work.MyTool.url_conversion(local_job, True) + "&final=1&jump=1"
+	# 保存一个副本，生成list
+	tmp_url = res_url[:]
+	try:
+		# print(find_work.MyTool.proxies)
+		# print(find_work.MyTool.headers)
+		req = requests.get(tmp_url, proxies={"https": find_work.MyTool.proxies}, timeout=5, headers=find_work.MyTool.headers)
+		# print(req)
+		if req.status_code == 200:
+			print(req.text)
+	except Exception as msg:
+		print('fn[get_max_page][%s]' % (msg,))
+
+
+def show():
+	"""展示选择信息"""
+	tmp_url = ''
+
+	for item in pro:
+		print(item, end=' ')
+	print()
+	# 先获取某个省的所有城市url
+	input_pro = '广东'#input('请输入省份：')
+	pro_city_urls = get_pro_city(input_pro)
+	if pro_city_urls != 'No_Data':
+		for item in pro_city_urls:
+			print(item, end=' ')
+
+		print()
+		input_city = '肇庆'#input('请输入城市：')
+		city_urls = get_pro_city(input_pro, input_city)
+		tmp_url = city_urls
+	else:
+		print('找不到')
+		exit(0)
+
+	tmp_job = '服务员'#input('请输入职业:')
+
+	return tmp_url, tmp_job
+
+
+def get_pro_city(input_pro, input_city=None):
+	"""根据省份返回该省城市链接列表"""
+	if input_city == None:
+		for item in pro:
+			if item == input_pro:
+				return pro[item]
+		return 'No_Data'
+
+	try:
+		result = pro[input_pro][input_city]
+		return result
+	except Exception as e:
+		print('找不到该城市')
+		exit(0)
+
+
+if __name__ == '__main__':
+	find_work = Fw.FindWork()
+	pro = find_work.citys
+
+	main()
+"""
 out = open('58_job.csv', 'a+', newline='')
 csv_write = csv.writer(out, dialect='excel')
 ti_list = ['更新时间', '浏览人数', '申请人数', '薪水', '福利待遇', '应聘要求', '职位', '职称', '上班地址', '职位描述', '工作超链接']
@@ -34,8 +108,9 @@ def main():
 	# req_url = req_url + '/pn1/?key=' + input_job + '&final=1&jump=1'
 
 	do_work(res_url, find_work)
-
+	print('do_work end')
 	get_job()
+	print('get_job end')
 
 
 
@@ -60,6 +135,7 @@ def do_work(url, find_work):
 			raise Exception
 	except Exception as msg:
 		print("fun:do_work=>status_code【%s】【%s】" % (req.status_code, msg))
+
 
 def get_job():
 
@@ -162,3 +238,7 @@ def get_job():
 
 if __name__ == '__main__':
 	main()
+
+citys = find_work.citys['citys']
+
+"""
