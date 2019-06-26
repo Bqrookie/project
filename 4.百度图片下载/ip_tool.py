@@ -62,6 +62,8 @@ def get_proxies():
     except Exception as msg:
         data_json = requests.get("http://proxy.1again.cc:35050/api/v1/proxy/?region=%E4%B8%AD%E5%9B%BD").text
         data = json.loads(data_json)
+        print('Error!')
+        exit(1)
     finally:
         return data['data']['proxy']
 

@@ -46,7 +46,9 @@ def get_image(word, num, file_path):
         # 获得返回数据
         if req.status_code == 200:
             # 通过转换，修正编码错误
-            res = json.loads(req.text.replace('\/', '/').replace(r"\'", ''))['data']
+            res = json.loads(req.text.replace('\/', '/').replace(r"\'", ''))
+            print(req)
+            res = res['data']
             res = res[:len(res) - 1]
             for item in res:
                 tmp_name = str(random.randint(1, 999)) + str(time.time())
@@ -65,14 +67,13 @@ def get_image(word, num, file_path):
 def main():
 
     # 设置搜索关键字
-    search_work = '蘑菇头'
+    search_work = '二叉树'
 
     # 设置需要下载图片的页数
-    pages = 5
+    pages = 1
 
     # 设置下载目录
     file_path = 'C:/Users/Administrator/Desktop/' + search_work + '/'
-
     for i in range(1, pages+1):
         get_image(search_work, i, file_path)
 
