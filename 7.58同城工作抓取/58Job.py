@@ -2,6 +2,7 @@ import FindWork as Fw
 import requests
 from bs4 import BeautifulSoup
 import csv
+from lxml import etree
 
 
 
@@ -21,12 +22,17 @@ def get_max_page(local_url, local_job):
 	# 保存一个副本，生成list
 	tmp_url = res_url[:]
 	try:
-		# print(find_work.MyTool.proxies)
-		# print(find_work.MyTool.headers)
 		req = requests.get(tmp_url, proxies={"https": find_work.MyTool.proxies}, timeout=5, headers=find_work.MyTool.headers)
 		# print(req)
 		if req.status_code == 200:
-			print(req.text)
+			# print(req.text)
+			#//*[@id="list_con"]/li[2]
+			html = etree.parse(req.text)
+			# print(type(html))  # 输出html对象类型    <class 'lxml.etree._ElementTree'>
+			# xpath解析语法解析，获取所有的<li>标签的内容
+			result = html.xpath('//li[@class="job_item"]')
+			for item in result:
+				print(etree.tostring(item).decode('utf-8'))
 	except Exception as msg:
 		print('fn[get_max_page][%s]' % (msg,))
 
@@ -46,7 +52,7 @@ def show():
 			print(item, end=' ')
 
 		print()
-		input_city = '肇庆'#input('请输入城市：')
+		input_city = '广州'#input('请输入城市：')
 		city_urls = get_pro_city(input_pro, input_city)
 		tmp_url = city_urls
 	else:
