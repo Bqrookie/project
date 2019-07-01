@@ -11,7 +11,7 @@ page_queue = queue.Queue(888)
 # 创建一个线程锁，防止多线程写入文件时发生错乱
 # mutex_lock = threading.Lock()
 
-out = open('qtfy_d.csv', 'a+', newline='')
+out = open('qtfy_kehuan.csv', 'a+', newline='')
 csv_write = csv.writer(out, dialect='excel')
 
 def get_all_page():
@@ -22,12 +22,14 @@ def get_all_page():
 
     page_list = list()
     # url = 'http://www.qtfy7.com/vod-type-1-'#电影
-    url = 'http://www.qtfy7.com/vod-type-2-' # 电视剧
+    # url = 'http://www.qtfy7.com/vod-type-2-' # 电视剧
+    # url = 'http://www.qtfy7.com/vod-type-4-' # 动漫
+    url = 'http://www.qtfy7.com/vod-type-8-' # 科幻
 
     # 抓取的第一页
     min_page = 1
     # 抓取的最后一页
-    max_page = 888
+    max_page = 56
 
     for i in range(min_page, max_page):
         url_res = url + str(i) + '.html'
