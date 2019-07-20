@@ -44,8 +44,8 @@ def get_data():
             data.append("%s %s %s %s %s %s %s %s" % (row[0], row[1], row[
                         6], row[5], row[2], row[3], row[4], row[7]))
 
-    except Exception as e:
-        print(e)
+    except Exception as ret:
+        print('db_select[%s]' % (ret,))
     finally:
         return data
 
@@ -72,7 +72,7 @@ def insert_data(wifi_obj):
         db.commit()
     except Exception as ret:
         # Rollback in case there is any error
-        print(ret)
+        print('db_add[%s]' % (ret,))
         db.rollback()
 
     # 关闭数据库连接
@@ -96,7 +96,7 @@ def del_data(obj_id):
         db.commit()
     except Exception as ret:
         # Rollback in case there is any error
-        print(ret)
+        print('db_del[%s]' % (ret,))
         db.rollback()
 
     # 关闭连接
@@ -112,8 +112,7 @@ def edit_data(wifi_obj, id_obj):
     # SQL 更新语句
     sql = "update wifi set mac='%s', router='%s', routerPwd='%s', pin='%s', pwd='%s', ssid='%s', remarks='%s' where id \
 = %d" % (
-        wifi_obj['mac'],  wifi_obj['router'],  wifi_obj['routerPwd'],  wifi_obj['pin'],  wifi_obj['pwd'],  wifi_obj['ssi\
-        d'],  wifi_obj['remarks'], id_obj)
+        wifi_obj['mac'],  wifi_obj['router'],  wifi_obj['routerPwd'],  wifi_obj['pin'],  wifi_obj['pwd'],  wifi_obj['ssid'],  wifi_obj['remarks'], id_obj)
 
 
     try:
@@ -123,7 +122,7 @@ def edit_data(wifi_obj, id_obj):
         db.commit()
     except Exception as ret:
         # Rollback in case there is any error
-        print(ret)
+        print('db_edit[%s]' % (ret,))
         db.rollback()
 
     # 关闭数据库连接
